@@ -26,4 +26,7 @@ public class User {
 
     @CreationTimestamp
     private Timestamp createDate;
+
+    private String provider;
+    private String providerId;
 }
