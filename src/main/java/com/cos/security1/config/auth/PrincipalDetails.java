@@ -16,11 +16,11 @@ Authentication 안에는 User 정보가 있어야 함. -> User 오브젝트 타�
 Security Session => Authentication => UserDetails(PrincipalDetails)
  */
 
-public class PrincipleDetails implements UserDetails {
+public class PrincipalDetails implements UserDetails {
 
     private User user;  // composition
 
-    public PrincipleDetails(User user) {
+    public PrincipalDetails(User user) {
         this.user = user;
     }
 

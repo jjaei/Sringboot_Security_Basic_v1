@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class PrincipleDetailsService implements UserDetailsService {
+public class PrincipalDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
@@ -19,7 +19,7 @@ public class PrincipleDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (username != null) {
-            return new PrincipleDetails(user);
+            return new PrincipalDetails(user);
         }
         return null;
     }
