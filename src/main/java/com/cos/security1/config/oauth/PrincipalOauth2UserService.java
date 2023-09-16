@@ -31,10 +31,19 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         // 여기까지가 userRequest 정보 -> 구글로부터 회원 프로필을 받아야 함.(loadUser 함수)
         System.out.println("getAttributes : " + oAuth2User.getAttributes());
 
+        OAuth2UserInfo oAuth2UserInfo = null;
+
+        if (userRequest.getClientRegistration().getRegistrationId().equals("google")) {
+            System.out.println("구글 로그인 요청");
+            oAuth2UserInfo = new GoogleUserInfo(oAuth2User.getAttributes());
+        } else {
+            System.out.println("우리는 구글만 지원합니다.");
+        }
+
         // 회원가입
-        String provider = userRequest.getClientRegistration().getClientId();  // google
-        String providerId = oAuth2User.getAttribute("sub");
-        String email = oAuth2User.getAttribute("email");
+        String provider = oAuth2UserInfo.getProvider();  // google
+        String providerId = oAuth2UserInfo.getProviderId();
+        String email = oAuth2UserInfo.getEmail();
         String username = provider + "_" + providerId;  // google_sub
         String password = customBCryptPasswordEncoder.encode("겟인데어");
         String role = "ROLE_USER";
